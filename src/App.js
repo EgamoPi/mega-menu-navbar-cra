@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { createElement as $ } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import GlobalStyles from './components/GlobalStyles';
+// Nav
+import Nav from './components/navigation/Nav';
+// Page Import
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return $(
+		'div',
+		{ className: 'App' },
+		$(GlobalStyles),
+		$(Nav),
+		$(
+			Switch,
+			null,
+			$(Route, { exact: true, path: '/' }, $(Home)),
+			$(Route, { exact: true, path: '/about' }, $(About)),
+			$(Route, { exact: true, path: '/contact' }, $(Contact))
+		)
+	);
 }
 
 export default App;
